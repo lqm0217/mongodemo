@@ -14,17 +14,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class Swagger2Config {
 
-	@Bean
-	public Docket createRestApi() {
+    @Bean
+    public Docket createRestApi() {
 
-		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
-				.apis(RequestHandlerSelectors.basePackage("app.controller")).paths(PathSelectors.any()).build();
-	}
+        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
+                .apis(RequestHandlerSelectors.basePackage("com.learn.mongodemo.app.controller")).paths(PathSelectors.any()).build();
+    }
 
-	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("API Project").description("API Project use Swagger2")
-				.termsOfServiceUrl("http://localhost:8071")
-				.version("1.0").build();
-	}
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder().title("API Project").description("API Project use Swagger2")
+                .termsOfServiceUrl("http://localhost:8071")
+                .version("1.0").build();
+    }
 
 }
