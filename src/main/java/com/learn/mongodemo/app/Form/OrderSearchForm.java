@@ -4,27 +4,29 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Size;
-import java.io.Serializable;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class OrderSearchForm implements Serializable {
+public class OrderSearchForm {
 
-	private static final long serialVersionUID = -7839495979840777563L;
+    @Size(max = 10)
+    private String userId;
 
-	@Size(max = 10)
-	private String requestTime;
+    @Size(max = 10)
+    private String zip;
 
-	@Size(max = 1)
-	private String cancelFlag;
+    @Size(max = 10)
+    private String requestTime;
 
-	@Size(max = 10)
-	private String userId;
+    @Size(max = 1)
+    private String cancelFlag;
 
-	@Size(max = 10)
-	private String zip;
+    @Size(max = 10)
+    private String expectDeleverDate;
 }

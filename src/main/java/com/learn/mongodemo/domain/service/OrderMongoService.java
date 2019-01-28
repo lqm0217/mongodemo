@@ -12,4 +12,7 @@ public interface OrderMongoService {
 
 	OrderSummaryMongo saveOrder(OrderSummaryMongo orderSummary) throws Exception;
 
+	OrderSummaryMongo cancleOrder(OrderSummaryMongo orderSummary) throws Exception;
+
+
 }

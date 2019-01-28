@@ -1,5 +1,3 @@
-##做成中
-
 ### run mongo in docker
 ```
 docker run --name docker-mongo -v /Users/admin/Documents/docker/mongo/data:/data/db -p 27017:27017 -d mongo
@@ -16,7 +14,7 @@ npm install
 npm start
 ```
 
-> access to [http://localhost:1234/app/connection_list]
+> access to http://localhost:1234/app/connection_list
 
 > set connect information as [mongodb://{ip}:27017]
 > for example: [mongodb://192.168.3.52:27017]

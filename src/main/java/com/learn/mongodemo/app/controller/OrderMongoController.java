@@ -1,5 +1,6 @@
 package com.learn.mongodemo.app.controller;
 
+import com.learn.mongodemo.app.Form.OrderBaseForm;
 import com.learn.mongodemo.app.Form.OrderForm;
 import com.learn.mongodemo.app.Form.OrderSearchForm;
 import com.learn.mongodemo.domain.entity.OrderSummaryMongo;
@@ -8,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -49,10 +52,21 @@ public class OrderMongoController {
 	public List<OrderSummaryMongo> getOrders(@Validated OrderSearchForm from) throws Exception {
 
 		OrderSummaryMongo orderSummary = new OrderSummaryMongo();
-		//orderSummary.setCancelFlag("0".equals(from.getCancelFlag()) ? false : true);
-		//orderSummary.setUserId(Integer.valueOf(from.getUserId()));
-		orderSummary.setZip(from.getZip());
-		//orderSummary.setRequestTime(LocalDate.parse(from.getRequestTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		if (!StringUtils.isEmpty(from.getCancelFlag())) {
+			orderSummary.setCancelFlag("0".equals(from.getCancelFlag()) ? false : true);
+		}
+		if (!StringUtils.isEmpty(from.getUserId())) {
+			orderSummary.setUserId(Integer.valueOf(from.getUserId()));
+		}
+        if (!StringUtils.isEmpty(from.getZip())) {
+            orderSummary.setZip(from.getZip());
+        }
+        if (!StringUtils.isEmpty(from.getRequestTime())) {
+            orderSummary.setRequestTime(LocalDateTime.parse(from.getRequestTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        }
+        if (!StringUtils.isEmpty(from.getExpectDeleverDate())) {
+            orderSummary.setExpectDeleverDate(LocalDate.parse(from.getExpectDeleverDate()));
+        }
 
 		return orderService.getOrders(orderSummary);
 	}
@@ -67,11 +81,27 @@ public class OrderMongoController {
 
 		// TODO bean copy
 		OrderSummaryMongo orderSummary = new OrderSummaryMongo();
-		orderSummary.setCancelFlag("0".equals(from.getCancelFlag()) ? false : true);
 		orderSummary.setUserId(Integer.valueOf(from.getUserId()));
 		orderSummary.setZip(from.getZip());
-		orderSummary.setRequestTime(LocalDate.parse(from.getRequestTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		if (!StringUtils.isEmpty(from.getExpectDeleverDate())) {
+			orderSummary.setExpectDeleverDate(LocalDate.parse(from.getExpectDeleverDate()));
+		}
 
 		return orderService.saveOrder(orderSummary);
+	}
+
+	/**
+	 * get single order summary information by id.
+	 */
+	@PostMapping(value = "/cancel", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	@ApiOperation(value = "cancel", notes = "cancel", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public OrderSummaryMongo cancel(@Validated OrderBaseForm from) throws Exception {
+
+		OrderSummaryMongo orderSummary = new OrderSummaryMongo();
+		orderSummary.setUserId(Integer.valueOf(from.getUserId()));
+		orderSummary.setZip(from.getZip());
+
+		return orderService.cancleOrder(orderSummary);
 	}
 }
