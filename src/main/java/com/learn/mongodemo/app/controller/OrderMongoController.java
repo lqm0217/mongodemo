@@ -19,15 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
  * get order information.
  */
 @RestController
-@Validated
 @RequestMapping("/api/orderMongo")
 @Api(value = "OrderMongoController")
 public class OrderMongoController {
