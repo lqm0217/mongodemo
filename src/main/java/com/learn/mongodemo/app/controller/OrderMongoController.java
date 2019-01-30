@@ -61,9 +61,6 @@ public class OrderMongoController {
         if (!StringUtils.isEmpty(from.getZip())) {
             orderSummary.setZip(from.getZip());
         }
-        if (!StringUtils.isEmpty(from.getRequestTime())) {
-            orderSummary.setRequestTime(LocalDateTime.parse(from.getRequestTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        }
         if (!StringUtils.isEmpty(from.getExpectDeleverDate())) {
             orderSummary.setExpectDeleverDate(LocalDate.parse(from.getExpectDeleverDate()));
         }

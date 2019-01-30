@@ -21,7 +21,7 @@ npm start
 
 ### run demo as spring boot project
 > access to the swagger ui page
-http://localhost:8071/swagger-ui.html#
+http://localhost:8071/demo/swagger-ui.html#
 
 
 ### mongo db

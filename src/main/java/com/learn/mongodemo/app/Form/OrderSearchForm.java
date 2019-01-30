@@ -21,9 +21,6 @@ public class OrderSearchForm {
     @Size(max = 10)
     private String zip;
 
-    @Size(max = 10)
-    private String requestTime;
-
     @Size(max = 1)
     private String cancelFlag;
 
